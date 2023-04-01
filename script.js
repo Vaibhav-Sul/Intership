@@ -1,17 +1,27 @@
-const form = document.querySelector("form"),
-        nextBtn = form.querySelector(".nextBtn"),
-        backBtn = form.querySelector(".backBtn"),
-        allInput = form.querySelectorAll(".first input");
+let input = document.getElementById('inputBox');
+let buttons = document.querySelectorAll('button');
 
-
-nextBtn.addEventListener("click", ()=> {
-    allInput.forEach(input => {
-        if (input.value != ""){
-            form.classList.add('secActive');
-        } else {
-            form.classList.remove('secActive');
+let string = "";
+let arr = Array.from(buttons);
+arr.forEach(button => {
+    button.addEventListener('click', (e) =>{
+        if(e.target.innerHTML == '='){
+            string = eval(string);
+            input.value = string;
         }
+
+        else if(e.target.innerHTML == 'AC'){
+            string = "";
+            input.value = string;
+        }
+        else if (e.target.innerHTML == 'DE') {
+            string = string.substring(0, string.length-1);
+            input.value = string;
+        }
+        else{
+            string += e.target.innerHTML;
+            input.value = string;
+        }
+
     })
 })
-
-backBtn.addEventListener("click", () => form.classList.remove('secActive'));
